@@ -5,6 +5,7 @@ int main(int ac, char **av)
 	FILE *file;
 	char *line = NULL;
 	size_t buffline = 0;
+	
 
 	/* checking number of argument */
 	if (ac != 2)
@@ -14,9 +15,13 @@ int main(int ac, char **av)
 	file = fopen(av[1], "r");
 
 	/* getting text of open file */
-	getdelim(&line, &buffline, EOF, file);
-	printf("%s\n", line);
-	
+	while (getline(&line, &buffline, file) != -1)
+	{
+		/* TOKENIZATION */
+
+		printf("%s\n", line);
+	}
+
 	/* closing file */
 	fclose(file);
 
