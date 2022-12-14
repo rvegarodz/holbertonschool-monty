@@ -1,19 +1,24 @@
 #include "monty.h"
+/**
+ * main - read command arguments, opens file
+ *
+ */
 
 int main(int ac, char **av)
 {
 	FILE *file;
 	char *line = NULL;
 	size_t buffline = 0;
-	
-	char **result = malloc(sizeof(char *));
-	char *token;
-	int result_index = 0;
+	stack_t *stack = NULL;
+	unsigned int line_number = 0;
+
 
 	/* checking number of argument */
 	if (ac != 2)
+	{
+		fprintf(stderr, "USAGE: monty file");
 		exit(EXIT_FAILURE);
-
+	}
 	/* opening file */
 	file = fopen(av[1], "r"); 
 
@@ -21,25 +26,16 @@ int main(int ac, char **av)
 	while (getline(&line, &buffline, file) != -1)
 	{
 		/* TOKENIZATION */
-		token = strtok(line, " \n");
-		while (token)
+		tokens = tokenization(line, " \n");
+
+		if (strcmp(tokens[0], "push") == 0)
 		{
-			result[result_index] = token;
-			result_index++;
-			
-			/* Condition to realloc memory space for result */
-			if (result_index >= 2)
-			{
-			       result_index = result_index * 2;
-			       result = realloc(result, result_index * sizeof(char *));
-			}
-
-			/* tokenize again from the last position */
-			token = strtok(NULL, " \n");
+			push(&stack, line_number);
 		}
-
-		/* printing for test */
-		printf("%s\n", result[0]);
+		if (strcmp(tokens[0], "pall") == 0)
+		{
+			pall(&stack, line_number);
+		}
 	}
 
 	/* closing file */
