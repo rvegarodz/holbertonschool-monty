@@ -1,7 +1,9 @@
 #include "monty.h"
 /**
- * main - read command arguments, opens file
- *
+ * main - interpreter of monty
+ * @ac: counting of arguments
+ * @av: vector of arguments
+ * Return: 
  */
 
 int main(int ac, char **av)
@@ -10,36 +12,33 @@ int main(int ac, char **av)
 	char *line = NULL;
 	size_t buffline = 0;
 	stack_t *stack = NULL;
-	unsigned int line_number = 0;
+	unsigned int line_number = 1;
 
-
-	/* checking number of argument */
+	/* CHECKING NUMBER OF ARGUMENTS */
 	if (ac != 2)
 	{
 		fprintf(stderr, "USAGE: monty file");
 		exit(EXIT_FAILURE);
 	}
-	/* opening file */
+	/* OPENING FILE */
 	file = fopen(av[1], "r"); 
 
-	/* getting text of open file */
+	/* GETTING TEXT LINE OF OPEN FILE */
 	while (getline(&line, &buffline, file) != -1)
 	{
 		/* TOKENIZATION */
 		tokens = tokenization(line, " \n");
+		
+		/* COMPARE TOKEN AND CALL FUNCTION */
+		get_op_func(tokens)(&stack, line_number);
 
-		if (strcmp(tokens[0], "push") == 0)
-		{
-			push(&stack, line_number);
-		}
-		if (strcmp(tokens[0], "pall") == 0)
-		{
-			pall(&stack, line_number);
-		}
+		/* COUNT LINES OF THE FILE PROCESS */
+		line_number++;
+		
+		/* FREE MEMORY SPACE */
+
 	}
-
-	/* closing file */
+	/* CLOSING FILE */
 	fclose(file);
-
 	return (0);
 }

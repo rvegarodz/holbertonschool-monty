@@ -9,13 +9,28 @@ char **tokens = NULL;
 void push(stack_t **stack, unsigned int line_number)
 {
 	(void) line_number;
+	int p_int;
 
 	stack_t *node = malloc(sizeof(stack_t));
 
-	node->prev = NULL;
-	node->n = atoi(tokens[1]);
-	node->next = (*stack);
-	*stack = node;
+	if (node != NULL)
+	{
+		p_int = atoi(tokens[1]);
+
+		if (tokens[1] == NULL || !p_int)
+		{
+			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			free(node);
+			free(tokens[0]);
+			free(tokens[1]);
+			free(tokens);
+			exit(EXIT_FAILURE);
+		}
+		node->prev = NULL;
+		node->n = p_int;
+		node->next = (*stack);
+		*stack = node;
+	}
 }
 /**
  * pall - print all fucntion
@@ -33,15 +48,3 @@ void pall(stack_t **stack, unsigned int line_number)
 		temp = temp->next;
 	}
 }
-
-/*int main(void)
-{
-	stack_t *stack;
-
-	push(&stack, 0);
-	push(&stack, 1);
-	push(&stack, 2);
-	push(&stack, 3);
-	return (EXIT_SUCCESS);
-	
-}*/
