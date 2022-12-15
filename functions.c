@@ -20,10 +20,6 @@ void push(stack_t **stack, unsigned int line_number)
 		if (tokens[1] == NULL || !p_int)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
-			free(node);
-			free(tokens[0]);
-			free(tokens[1]);
-			free(tokens);
 			exit(EXIT_FAILURE);
 		}
 		node->prev = NULL;
