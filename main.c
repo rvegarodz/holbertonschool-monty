@@ -36,6 +36,8 @@ int main(int ac, char **av)
 		line_number++;
 		
 		/* FREE MEMORY SPACE */
+		free(tokens);
+		free(line);
 
 	}
 	/* CLOSING FILE */
