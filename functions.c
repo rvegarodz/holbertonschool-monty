@@ -25,8 +25,13 @@ void push(stack_t **stack, unsigned int line_number)
 		node->prev = NULL;
 		node->n = p_int;
 		node->next = (*stack);
-		*stack = node;
+		if (node->next != NULL)
+		{
+			node->next->prev = node;
+		}
+			*stack = node;
 	}
+
 }
 /**
  * pall - print all fucntion
@@ -44,3 +49,24 @@ void pall(stack_t **stack, unsigned int line_number)
 		temp = temp->next;
 	}
 }
+/**
+ * free_listint - free struct
+ * @head: pointer to head node
+ * Return: free struct
+ */
+void free_listint(stack_t *stack)
+{
+	stack_t *newnode;
+
+	while (stack != NULL)
+	{
+		newnode = stack;
+		stack = newnode->next;
+		free(newnode);
+	}
+}
+/*void pint(stack_t **stack, unsigned int line_number)
+{
+	(void)line_number;
+	printf("%d", (*stack)->n);
+}*/
