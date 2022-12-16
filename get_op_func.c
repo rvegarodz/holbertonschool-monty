@@ -3,7 +3,7 @@
  *
  *
  */
-void (*get_op_func(char **tokens))(stack_t **stack, unsigned int)
+void (*get_op_func(char **tokens))(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 {
 	static instruction_t in_fun[] = {
 		{"push", push},
