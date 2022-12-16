@@ -1,4 +1,4 @@
-#include "monty.h"
+#include"monty.h"
 /**
  * main - interpreter of monty
  * @ac: counting of arguments
@@ -34,11 +34,18 @@ int main(int ac, char **av)
 
 		/* COUNT LINES OF THE FILE PROCESS */
 		line_number++;
-		
-		/* FREE MEMORY SPACE */
 
+		free(tokens[1]);
+		free(tokens[0]);
+		free(tokens);
+		/* FREE MEMORY SPACE */
+		/*free(tokens);
+		free(line);*/
 	}
 	/* CLOSING FILE */
+	free_listint(stack);
+
+	free(line);
 	fclose(file);
 	return (0);
 }
