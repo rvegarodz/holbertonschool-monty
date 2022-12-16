@@ -6,7 +6,7 @@ char **tokens = NULL;
  * @nine_number: line number
  * Return: node;
  */
-void push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 {
 	(void) line_number;
 	int p_int;
@@ -15,11 +15,21 @@ void push(stack_t **stack, unsigned int line_number)
 
 	if (node != NULL)
 	{
-		p_int = atoi(tokens[1]);
+		if (tokens[1] != NULL)
+		{
+			p_int = atoi(tokens[1]);
+		}
 
-		if (tokens[1] == NULL || !p_int)
+		if (strcmp(tokens[1], "0") != 0 && p_int == 0)
 		{
 			fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			free(tokens[1]);
+			free(tokens[0]);
+			free(tokens);
+			free(line);
+			free(node);
+			free_listint(*stack);
+			fclose(file);
 			exit(EXIT_FAILURE);
 		}
 		node->prev = NULL;
@@ -36,12 +46,14 @@ void push(stack_t **stack, unsigned int line_number)
 /**
  * pall - print all fucntion
  * @stack: linked list of nodes stack
- * @line_number: line number for errors
+ * @line_number:i line number for errors
  */
-void pall(stack_t **stack, unsigned int line_number)
+void pall(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 {
 	stack_t *temp = *stack;
 	(void)line_number;
+	(void)line;
+	(void)file;
 
 	while (temp != NULL)
 	{
@@ -68,7 +80,7 @@ void free_listint(stack_t *stack)
 /**
  *
  */
-void pint(stack_t **stack, unsigned int line_number)
+void pint(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 {
 	(void)line_number;
 
@@ -79,7 +91,11 @@ void pint(stack_t **stack, unsigned int line_number)
 	else
 	{
 		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		free(tokens[1]);
+		free(tokens[0]);
 		free(tokens);
+		free(line);
+		fclose(file);
 		exit(EXIT_FAILURE);
 	}
 }
