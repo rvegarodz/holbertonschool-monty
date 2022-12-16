@@ -39,12 +39,12 @@ typedef struct stack_s
 typedef struct instruction_s
 {
         char *opcode;
-        void (*f)(stack_t **stack, unsigned int line_number);
+        void (*f)(stack_t **stack, unsigned int line_number, char *line, FILE *file);
 } instruction_t;
 extern char **tokens;
-void pint(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number, char *line, FILE *file);
 void free_listint(stack_t *stack);
-void (*get_op_func(char **tokens))(stack_t **stack, unsigned int);
-void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
+void (*get_op_func(char **tokens))(stack_t **stack, unsigned int line_number, char *line, FILE *file);
+void push(stack_t **stack, unsigned int line_number, char *line, FILE *file);
+void pall(stack_t **stack, unsigned int line_numberar, char  *line, FILE *file);
 #endif
