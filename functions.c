@@ -65,8 +65,22 @@ void free_listint(stack_t *stack)
 		free(newnode);
 	}
 }
-/*void pint(stack_t **stack, unsigned int line_number)
+/**
+ *
+ */
+void pint(stack_t **stack, unsigned int line_number)
 {
 	(void)line_number;
-	printf("%d", (*stack)->n);
-}*/
+
+	if (*stack != NULL)
+	{
+		printf("%d\n", (*stack)->n);
+	}
+	else
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		free(tokens);
+		exit(EXIT_FAILURE);
+	}
+}
+
