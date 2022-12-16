@@ -30,7 +30,7 @@ int main(int ac, char **av)
 		tokens = tokenization(line, " \n");
 		
 		/* COMPARE TOKEN AND CALL FUNCTION */
-		get_op_func(tokens)(&stack, line_number);
+		get_op_func(tokens)(&stack, line_number, line, file);
 
 		/* COUNT LINES OF THE FILE PROCESS */
 		line_number++;
