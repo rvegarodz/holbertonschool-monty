@@ -47,4 +47,6 @@ void free_listint(stack_t *stack);
 void (*get_op_func(char **tokens))(stack_t **stack, unsigned int line_number, char *line, FILE *file);
 void push(stack_t **stack, unsigned int line_number, char *line, FILE *file);
 void pall(stack_t **stack, unsigned int line_numberar, char  *line, FILE *file);
+
+void unkn_func(stack_t **stack, unsigned int line_number, char *line, FILE *file);
 #endif
