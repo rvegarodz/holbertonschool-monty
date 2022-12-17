@@ -117,4 +117,23 @@ void pint(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 		exit(EXIT_FAILURE);
 	}
 }
+/**
+ * sum - summ all elements with in linked list
+ * @stack: head of linked list
+ * Return: sum of elements
+ */
+void add(stack_t **stack, unsigned int line_number, char *line, FILE *file)
+{
+	(void)line_number;
+	(void)line;
+	(void)file;
+	int sum;
 
+	sum = (*stack)->n + (*stack)->next->n;
+	*stack = (*stack)->next;
+	(*stack)->n = sum;
+	free((*stack)->prev);
+
+		/*sum += (*stack)->next->n;
+		*stack = (*stack)->next;*/
+}
