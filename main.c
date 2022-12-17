@@ -3,7 +3,7 @@
  * main - interpreter of monty
  * @ac: counting of arguments
  * @av: vector of arguments
- * Return: 
+ * Return: always 0
  */
 
 int main(int ac, char **av)
@@ -18,11 +18,11 @@ int main(int ac, char **av)
 	/* CHECKING NUMBER OF ARGUMENTS */
 	if (ac != 2)
 	{
-		fprintf(stderr, "USAGE: monty file");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	/* OPENING FILE */
-	file = fopen(av[1], "r"); 
+	file = fopen(av[1], "r");
 
 	/* GETTING TEXT LINE OF OPEN FILE */
 	while (getline(&line, &buffline, file) != -1)
@@ -42,9 +42,8 @@ int main(int ac, char **av)
 		free(tokens[0]);
 		free(tokens);
 	}
-	/* CLOSING FILE */
-	free_listint(stack);
 
+	free_listint(stack);
 	free(line);
 	fclose(file);
 	return (0);
