@@ -23,17 +23,21 @@ int main(int ac, char **av)
 	/* OPENING FILE */
 	file = fopen(av[1], "r");
 
+	if (file == NULL)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
+		exit (EXIT_FAILURE);
+	}
+
 	/* GETTING TEXT LINE OF OPEN FILE */
 	while (getline(&line, &buffline, file) != -1)
 	{
 		/* TOKENIZATION */
 		tokens = tokenization(line, " \n");
-		
 		if (tokens[0] != NULL || tokens[1] != NULL)
 		{
 			/* COMPARE TOKEN AND CALL FUNCTION */
 			get_op_func(tokens)(&stack, line_number, line, file);
-
 			/* COUNT LINES OF THE FILE PROCESS */
 			line_number++;
 		}
@@ -41,7 +45,6 @@ int main(int ac, char **av)
 		free(tokens[0]);
 		free(tokens);
 	}
-
 	free_listint(stack);
 	free(line);
 	fclose(file);
