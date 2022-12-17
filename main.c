@@ -8,6 +8,7 @@
 
 int main(int ac, char **av)
 {
+	/* int p_int; */
 	FILE *file;
 	char *line = NULL;
 	size_t buffline = 0;
@@ -28,14 +29,15 @@ int main(int ac, char **av)
 	{
 		/* TOKENIZATION */
 		tokens = tokenization(line, " \n");
+		
+		if (tokens[0] != NULL || tokens[1] != NULL)
+		{
+			/* COMPARE TOKEN AND CALL FUNCTION */
+			get_op_func(tokens)(&stack, line_number);
 
-		/* COMPARE TOKEN AND CALL FUNCTION */
-		get_op_func(tokens)(&stack, line_number, line, file);
-
-		/* COUNT LINES OF THE FILE PROCESS */
-		line_number++;
-
-		/*FREE SPACE*/
+			/* COUNT LINES OF THE FILE PROCESS */
+			line_number++;
+		}
 		free(tokens[1]);
 		free(tokens[0]);
 		free(tokens);
