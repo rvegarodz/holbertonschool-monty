@@ -16,6 +16,9 @@ int main(int ac, char **av)
 
 	/* CHECKING NUMBER OF ARGUMENTS */
 	if (ac != 2)
+		exit(EXIT_FAILURE);
+
+	if (av[1] == NULL)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
