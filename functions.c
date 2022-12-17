@@ -2,9 +2,10 @@
 char **tokens = NULL;
 /**
  * push - push a new node to the stack
- * @stack: list of structs
- * @nine_number: line number
- * Return: node;
+ * @stack: linked list of nodes
+ * @line_number: line number
+ * @line: pointer to string of getline function
+ * @file: file in use
  */
 void push(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 {
@@ -13,6 +14,18 @@ void push(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 
 	stack_t *node = malloc(sizeof(stack_t));
 
+	if (node == NULL || tokens[1] == NULL)
+	{
+		fprintf(stderr, "L%d: usage: push integer\n", line_number);
+		free(tokens[1]);
+		free(tokens[0]);
+		free(tokens);
+		free(line);
+		free(node);
+		free_listint(*stack);
+		fclose(file);
+		exit(EXIT_FAILURE);
+	}
 	if (node != NULL)
 	{
 		if (tokens[1] != NULL)
@@ -44,9 +57,11 @@ void push(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 
 }
 /**
- * pall - print all fucntion
- * @stack: linked list of nodes stack
- * @line_number:i line number for errors
+ * pall - print all on the stack
+ * @stack: linked list of nodes
+ * @line_number: line number for errors
+ * @line: pointer to string of getline function
+ * @file: file in use
  */
 void pall(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 {
@@ -63,8 +78,7 @@ void pall(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 }
 /**
  * free_listint - free struct
- * @head: pointer to head node
- * Return: free struct
+ * @stack: linked list of nodes
  */
 void free_listint(stack_t *stack)
 {
@@ -78,7 +92,11 @@ void free_listint(stack_t *stack)
 	}
 }
 /**
- *
+ * pint - prints the value at the top of the stack
+ * @stack: linked list of nodes
+ * @line_number: line number for errors
+ * @line: pointer to string of getline function
+ * @file: file in use
  */
 void pint(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 {
