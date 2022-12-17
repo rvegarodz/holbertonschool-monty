@@ -9,13 +9,14 @@ void (*get_op_func(char **tokens))(stack_t **stack, unsigned int line_number, ch
 		{"push", push},
 		{"pall", pall},
 		{"pint", pint},
+		{"add", add},
 		{NULL, unkn_func},
 	};
 
 	int i = 0;
 
 	
-	while (i < 3)
+	while (i < 4)
 	{
 		if (strcmp(tokens[0], in_fun[i].opcode) == 0)
 		{
