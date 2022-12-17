@@ -43,7 +43,6 @@ int main(int ac, char **av)
 		free(tokens);
 	}
 	/* CLOSING FILE */
-	printf("closing loop\n");
 	free_listint(stack);
 
 	free(line);
