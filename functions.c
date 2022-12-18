@@ -77,21 +77,6 @@ void pall(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 	}
 }
 /**
- * free_listint - free struct
- * @stack: linked list of nodes
- */
-void free_listint(stack_t *stack)
-{
-	stack_t *newnode;
-
-	while (stack != NULL)
-	{
-		newnode = stack;
-		stack = newnode->next;
-		free(newnode);
-	}
-}
-/**
  * pint - prints the value at the top of the stack
  * @stack: linked list of nodes
  * @line_number: line number for errors
@@ -136,4 +121,36 @@ void add(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 
 		/*sum += (*stack)->next->n;
 		*stack = (*stack)->next;*/
+}
+/**
+ * pop - delet node
+ *
+ */
+void pop(stack_t **stack, unsigned int line_number, char *line, FILE *file)
+{
+	(void)file;
+	(void)line;
+
+	stack_t *head = *stack;
+
+	if (head != NULL)
+	{
+
+		*stack = (*stack)->next;
+		if (*stack != NULL)
+		{
+			(*stack)->prev = NULL;
+		}
+		free(head);
+	}
+	else
+	{
+		fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+		free(tokens[1]);
+		free(tokens[0]);
+		free(tokens);
+		free(line);
+		free(file);
+		exit(EXIT_FALIURE);
+	}
 }
