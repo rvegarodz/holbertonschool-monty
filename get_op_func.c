@@ -10,6 +10,7 @@ void (*get_op_func(char **tokens))(stack_t **stack, unsigned int line_number, ch
 		{"pall", pall},
 		{"pint", pint},
 		{"add", add},
+		{"nop", nop},
 		{"pop",pop},
 		{NULL, unkn_func},
 	};
@@ -17,7 +18,7 @@ void (*get_op_func(char **tokens))(stack_t **stack, unsigned int line_number, ch
 	int i = 0;
 
 	
-	while (i < 5)
+	while (i < 6)
 	{
 		if (strcmp(tokens[0], in_fun[i].opcode) == 0)
 		{
