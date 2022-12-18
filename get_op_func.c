@@ -10,6 +10,7 @@ void (*get_op_func(char **tokens))(stack_t **stack, unsigned int line_number, ch
 		{"pall", pall},
 		{"pint", pint},
 		{"add", add},
+		{"pop",pop},
 		{NULL, unkn_func},
 	};
 
