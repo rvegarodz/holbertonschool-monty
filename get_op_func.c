@@ -17,7 +17,7 @@ void (*get_op_func(char **tokens))(stack_t **stack, unsigned int line_number, ch
 	int i = 0;
 
 	
-	while (i < 4)
+	while (i < 5)
 	{
 		if (strcmp(tokens[0], in_fun[i].opcode) == 0)
 		{
