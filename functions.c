@@ -151,6 +151,6 @@ void pop(stack_t **stack, unsigned int line_number, char *line, FILE *file)
 		free(tokens);
 		free(line);
 		free(file);
-		exit(EXIT_FALIURE);
+		exit(EXIT_FAILURE);
 	}
 }
